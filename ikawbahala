@@ -1,0 +1,40 @@
+DROP DATABASE ikawbahala;
+CREATE DATABASE ikawbahala;
+use ikawbahala;
+
+CREATE TABLE Owner(
+	Owner_Id int PRIMARY KEY AUTO_INCREMENT,
+	Name varchar(30),
+	Employee_Employee varchar(30),
+	Employee_Id int
+);
+
+CREATE TABLE Employee(
+	Employee_Id int PRIMARY KEY,
+    Owner_Id int,
+	Name varchar(30),
+    Position varchar(30),
+    Address varchar(30),
+    CONSTRAINT fkk_Owner FOREIGN KEY (Owner_Id)
+	REFERENCES Owner(Owner_Id)
+);
+
+CREATE TABLE Supplier(
+	Supplier_Id int PRIMARY KEY,
+    Employee_Id int,
+	Name varchar(30),
+	Ingredients_Name varchar(500),
+	CONSTRAINT fkk_Employee FOREIGN KEY (Employee_Id)
+	REFERENCES Employee(Employee_Id)
+);
+
+CREATE TABLE Ingredients(
+	Ingredients_Id int PRIMARY KEY,
+	Supplier_Name varchar(30),
+    Supplier_Id int,
+	Ingredients_Name varchar(30),
+	Description varchar(30),
+    Price int,
+	CONSTRAINT fkk_Supplier FOREIGN KEY (Supplier_Id)
+	REFERENCES  Supplier(Supplier_Id)
+);
